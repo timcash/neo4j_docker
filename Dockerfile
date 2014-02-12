@@ -38,4 +38,4 @@ ADD neo4j-server.properties /var/lib/neo4j/conf/neo4j-server.properties
 
 EXPOSE 7474
 
-ENTRYPOINT  ["service", "neo4j-service", "start"]
+CMD service neo4j-service start
