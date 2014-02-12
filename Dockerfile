@@ -34,7 +34,7 @@ RUN echo 'deb http://debian.neo4j.org/repo stable/' > /etc/apt/sources.list.d/ne
 RUN apt-get update
 RUN apt-get install -y neo4j
 
-ADD neo4j-server.properties /etc/neo4j/neo4j-server.properties
+ADD neo4j-server.properties /var/lib/neo4j/conf/neo4j-server.properties
 
 EXPOSE 7474
 
