@@ -43,4 +43,4 @@ RUN mv -f neo4j-server.properties /var/lib/neo4j/conf/neo4j-server.properties
 
 EXPOSE 7474
 
-CMD service neo4j-service console
+CMD ./var/lib/neo4j/bin/neo4j console
