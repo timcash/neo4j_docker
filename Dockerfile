@@ -30,9 +30,11 @@ RUN apt-get install -y wget
 RUN wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
 RUN echo 'deb http://debian.neo4j.org/repo stable/' > /etc/apt/sources.list.d/neo4j.list
 
-ADD neo4j-server.properties /etc/neo4j/neo4j-server.properties
+
 RUN apt-get update
 RUN apt-get install -y neo4j
+
+ADD neo4j-server.properties /etc/neo4j/neo4j-server.properties
 
 EXPOSE 7474
 
