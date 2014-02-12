@@ -4,15 +4,26 @@ MAINTAINER  Tim Cash, timcash@gmail.com
 
 # INSTALL OS DEPENDENCIES AND NEO4J
 
-RUN apt-get -y install python-software-properties
-RUN add-apt-repository ppa:webupd8team/java
-RUN apt-get update && apt-get -y upgrade
+# add community-maintained universe repository to sources
+RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
 
-# automatically accept oracle license
+# date packages were last updated
+ENV REFRESHED_AT 2014-01-14
+ENV DEBIAN_FRONTEND noninteractive
+# resynchronize package index files from their sources
+RUN apt-get -qq update
+
+# install software-properties-common (ubuntu >= 12.10) to be able to use add-apt-repository
+RUN apt-get -qq -y install software-properties-common
+# add PPA for java
+RUN add-apt-repository ppa:webupd8team/java
+# resynchronize package index files from their sources
+RUN apt-get -qq update
+
+# accept Oracle license
 RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-# and install java 7 oracle jdk
-RUN apt-get -y install oracle-java7-installer && apt-get clean
-RUN update-alternatives --display java 
+# install jdk7
+RUN apt-get -qq -y install oracle-java7-installer
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
 RUN apt-get install -y wget
